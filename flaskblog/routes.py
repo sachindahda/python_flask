@@ -1,11 +1,7 @@
-from flask import Flask, escape, request, render_template, url_for,flash,redirect
-from flask_sqlalchemy import SQLAlchemy
-from forms import RegistrationForm, LoginForm
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'd1cb6705b8834bd8c206e10403b0c8ea'
-app.config['SQLALCHEMY_DATABASE_URI']='sqllite:///site.db'
-
-db=SQLAlchemy(app)
+from flask import    request,render_template, url_for,flash,redirect
+from flaskblog.forms import RegistrationForm, LoginForm
+from flaskblog.models import User,Post
+from flaskblog import app
 
 posts = [
     {
@@ -22,7 +18,7 @@ posts = [
         'date_posted': '24-9-2019'
 
     }
-]
+] 
 
 
 @app.route('/')
@@ -57,9 +53,3 @@ def login():
             flash('An error occured','danger')
 
     return render_template('login.html', title='Register', form=form)
-
-
-if __name__ == '__main__':
-   
-    app.run(debug=True)
-    
